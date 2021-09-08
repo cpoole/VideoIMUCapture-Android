@@ -464,18 +464,28 @@ public class Camera2Proxy {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= 28) {
-            float[] distortion = mCameraCharacteristics.get(CameraCharacteristics.LENS_DISTORTION);
-            if ((distortion != null) && (abs(distortion[0]) > 0)) {
-                for (float e : distortion) {
-                    metaBuilder.addDistortionParams(e);
-                }
-            }
-            Integer lensPoseReference = mCameraCharacteristics.get(CameraCharacteristics.LENS_POSE_REFERENCE);
-            if (lensPoseReference != null) {
-                metaBuilder.setLensPoseReferenceValue(lensPoseReference);
+        float[] distortion = mCameraCharacteristics.get(CameraCharacteristics.LENS_DISTORTION);
+        if((distortion != null)) {
+            for (float e : distortion) {
+                metaBuilder.addDistortionParams(e);
             }
         }
+
+        float[] distortion2 = mCameraCharacteristics.get(CameraCharacteristics.LENS_RADIAL_DISTORTION);
+        Log.d(TAG, "radial distortion params");
+
+        if((distortion2 != null)) {
+            for (float e : distortion2) {
+                Log.d(TAG, String.valueOf(e));
+            }
+        }
+
+
+        Integer lensPoseReference = mCameraCharacteristics.get(CameraCharacteristics.LENS_POSE_REFERENCE);
+        if (lensPoseReference != null) {
+            metaBuilder.setLensPoseReferenceValue(lensPoseReference);
+        }
+
         mRecordingWriter.queueData(metaBuilder.build());
 
     }
