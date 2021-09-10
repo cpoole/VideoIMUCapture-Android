@@ -83,7 +83,7 @@ public class TextureMovieEncoder implements Runnable {
     private boolean mReady;
     private boolean mRunning;
     private Long mLastFrameTimeNs = null;
-    public Float mFrameRate = 30.f;
+    public Float mFrameRate = 60.f;
     private float[] STMatrix = new float[16];
 
     public interface EncoderListener {
